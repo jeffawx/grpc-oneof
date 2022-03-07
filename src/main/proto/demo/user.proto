@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package demo;
+
+import "airwallex/protobuf/message_mapping.proto";
+import "airwallex/type/uuid.proto";
+
+service UserService {
+  rpc Get(airwallex.type.UUID) returns (User) {}
+}
+
+message User {
+  optional airwallex.type.UUID id = 1;
+  oneof user_type {
+    Employee employee = 2;
+    Customer customer = 3;
+  }
+  option (airwallex.protobuf.java_mapping) = {
+    target_type: "com.example.demo.User"
+    mapper_type: "com.example.demo.UserTypeMapper"
+  };
+
+  message Employee {
+    string name = 1;
+  }
+
+  message Customer {
+    string address = 1;
+  }
+}
