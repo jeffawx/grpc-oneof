@@ -21,7 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest
 class ApplicationTests {
 
     @Autowired
-    @GrpcClient
+    @GrpcClient(id = "userClient")
     private lateinit var userClient: UserServiceRpc
 
     @Test
